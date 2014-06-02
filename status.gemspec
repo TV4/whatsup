@@ -7,16 +7,12 @@ require "status/version"
 Gem::Specification.new do |s|
   s.name        = "status"
   s.version     = Status::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Status."
-  s.description = "TODO: Description of Status."
+  s.authors     = ["Patrik Stenmark"]
+  s.email       = ["patrik@stenmark.io"]
+  s.homepage    = "http://www.github.com/TV4/status"
+  s.summary     = "Easy, customizable status pages"
+  s.description = "A gem for Rack apps giving your app a /__status page which returns information about the app in JSON format"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["lib/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
-
-  s.add_dependency "attr_extras", "~> 3.0.0"
-
-  s.add_development_dependency "sqlite3"
 end
