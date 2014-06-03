@@ -16,10 +16,6 @@ module Whatsup
         register(:rails, Whatsup::Collectors::RailsStatus.new)
       end
 
-      if defined?(Toggle) && Toggle.respond_to?(:as_json)
-        register(:toggles, ->() { Toggle.as_json })
-      end
-
       if defined?(Sinatra)
         register(:sinatra, Whatsup::Collectors::SinatraStatus.new)
       end
