@@ -42,7 +42,6 @@ class Whatsup::StatusPage
       end
 
       body = result.to_json
-      sleep 2
 
       req = Rack::Request.new(env)
 
