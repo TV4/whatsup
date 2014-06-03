@@ -11,6 +11,11 @@ Whatsup can be used with any Rack app, by including the middleware
 Whatsup::StatusPage with a configuration object. See below for
 framework specific instructions
 
+### Authentication
+
+Whatsup requires explicit configuration of username and password.
+If you don't want any authentication, set username and password to empty string.
+
 ### Rails
 
 The Whatsup gem includes a Railtie which inserts the middleware in the
@@ -35,7 +40,7 @@ You can also put the configuration in an initializer (`config/initializers/whats
         config = Whatsup::Configuration.new
         config.username = "admin"
         config.password = "topsecret"
-        use Whatsup::StatusPage, config: config
+        use Whatsup::StatusPage, config
 
 ### Then
 
@@ -85,7 +90,7 @@ If using Sinatra, you already have a Configuration object to use:
     config.username = "admin"
     config.password = "topsecret"
     config.register(:hello, ->() { "hello world" }
-    use Whatsup::StatusPage, config: config
+    use Whatsup::StatusPage, config
 
 For some examples, see the included collectors for examples
 (lib/whatsup/collectors.rb)
