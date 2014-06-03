@@ -22,6 +22,11 @@ application.rb putting something like
         config.whatsup.username = "admin"
         config.whatsup.password = "topsecret"
 
+You can also put the configuration in an initializer (`config/initializers/whatsup.rb`):
+
+    Rails.application.config.whatsup.username = "admin"
+    Rails.application.config.whatsup.password = "topsecret"
+
 ### Sinatra
 
 * Put it in your gemfile
