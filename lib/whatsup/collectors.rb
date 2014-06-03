@@ -16,7 +16,9 @@ module Whatsup::Collectors
         rack_env: ENV['RACK_ENV'],
         config: {
           allow_concurrency: Rails.configuration.allow_concurrency,
-          time_zone: Rails.configuration.time_zone
+          time_zone: Rails.configuration.time_zone,
+          log_level: Rails.configuration.log_level,
+          rack_cache: Rails.configuration.action_dispatch
         },
         version: Rails::VERSION::STRING
       }
@@ -28,6 +30,7 @@ module Whatsup::Collectors
       {
         description: RUBY_DESCRIPTION,
         yamler: YAML::ENGINE.yamler,
+        multi_json_engine: (defined?(MultiJson) ? MultiJson.engine.name : nil),
         gc: {
           count: GC.count,
           stat: (GC.respond_to?(:stat) ? GC.stat : nil),
