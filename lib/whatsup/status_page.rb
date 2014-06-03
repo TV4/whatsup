@@ -1,4 +1,4 @@
-class Status::StatusPage
+class Whatsup::StatusPage
   attr_reader :collectors
   def initialize(app, options)
     @app = app

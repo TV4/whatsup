@@ -1,4 +1,4 @@
-module Status
+module Whatsup
   class Configuration
     attr_reader :collectors
     attr_accessor :username
@@ -8,12 +8,12 @@ module Status
       @collectors = {}
 
       if defined?(Resque)
-        register(:job_queues, Status::Collectors::ResqueStatus.new)
+        register(:job_queues, Whatsup::Collectors::ResqueStatus.new)
       end
 
       if defined?(::Rails)
-        register(:cache, Status::Collectors::CacheStatus.new)
-        register(:rails, Status::Collectors::RailsStatus.new)
+        register(:cache, Whatsup::Collectors::CacheStatus.new)
+        register(:rails, Whatsup::Collectors::RailsStatus.new)
       end
 
       if defined?(Toggle) && Toggle.respond_to?(:as_json)
@@ -21,10 +21,10 @@ module Status
       end
 
       if defined?(Sinatra)
-        register(:sinatra, Status::Collectors::SinatraStatus.new)
+        register(:sinatra, Whatsup::Collectors::SinatraStatus.new)
       end
 
-      register(:ruby, Status::Collectors::RubyStatus.new)
+      register(:ruby, Whatsup::Collectors::RubyStatus.new)
 
       register(:date, ->() { DateTime.now })
     end

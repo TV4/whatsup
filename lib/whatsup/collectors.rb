@@ -1,4 +1,4 @@
-module Status::Collectors
+module Whatsup::Collectors
   class ResqueStatus
     def call
       Resque.queues.inject({}) do |hsh, queue_name|

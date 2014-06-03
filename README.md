@@ -1,4 +1,4 @@
-# Status
+# Whatsup
 
 A extensible way of exposing information about a running web app.
 
@@ -7,30 +7,30 @@ and anything else you want to show that can be accessed through ruby.
 
 ## Usage
 
-Status can be used with any Rack app, by including the middleware
-Status::StatusPage with a configuration object. See below for
+Whatsup can be used with any Rack app, by including the middleware
+Whatsup::StatusPage with a configuration object. See below for
 framework specific instructions
 
 ### Rails
 
-The status gem includes a Railtie which inserts the middleware in the
-middleware chain and exposes the configuration object as `config.status_page`.
+The Whatsup gem includes a Railtie which inserts the middleware in the
+middleware chain and exposes the configuration object as `config.whatsup`.
 
 The only thing needed is to put it in your gemfile and configure it by in your
 application.rb putting something like
 
-        config.status_page.username = "admin"
-        config.status_page.password = "topsecret"
+        config.whatsup.username = "admin"
+        config.whatsup.password = "topsecret"
 
 ### Sinatra
 
 * Put it in your gemfile
 * Add the following to your app:
 
-        config = Status::Configuration.new
+        config = Whatsup::Configuration.new
         config.username = "admin"
         config.password = "topsecret"
-        use Status::StatusPage, config: config
+        use Whatsup::StatusPage, config: config
 
 ### Then
 
@@ -40,7 +40,7 @@ specified above.
 
 ## What does it show?
 
-The app is built up by Collectors (The standard ones are defined in Status::Collectors).
+The app is built up by Collectors (The standard ones are defined in Whatsup::Collectors).
 A Collector is something that responds to `call` without arguments and returns a
 Hash
 
@@ -69,19 +69,19 @@ Which can be registered by using the `register` method on the Configuration
 object. It takes two arguments, the first is the key the collected information
 will be under in the status json and the second is the actual collector.
 
-If you are using Rails, this is obtained by `config.status_page` in
+If you are using Rails, this is obtained by `config.whatsup` in
 your application.rb:
 
-    config.status_page.register(:hello, ->() { "Hello world" })
+    config.whatsup.register(:hello, ->() { "Hello world" })
 
 If using Sinatra, you already have a Configuration object to use:
 
-    config = Status::Configuration.new
+    config = Whatsup::Configuration.new
     config.username = "admin"
     config.password = "topsecret"
     config.register(:hello, ->() { "hello world" }
-    use Status::StatusPage, config: config
+    use Whatsup::StatusPage, config: config
 
 For some examples, see the included collectors for examples
-(lib/status/collectors.rb)
+(lib/whatsup/collectors.rb)
 
