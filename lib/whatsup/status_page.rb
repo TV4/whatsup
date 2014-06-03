@@ -8,13 +8,12 @@ class Whatsup::StatusPage
       add_collector(key, collector)
     end
 
-
     @username = options[:config].username
     @password = options[:config].password
   end
 
   def call(env)
-    if env["REQUEST_PATH"] == "/__status"
+    if env["PATH_INFO"] == "/__status"
       unless @username && @password
         raise ArgumentError, "Whatsup needs to be explicitly configured with a username and password (See README)"
       end
