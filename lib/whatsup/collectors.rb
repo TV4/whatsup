@@ -52,4 +52,12 @@ module Whatsup::Collectors
       }
     end
   end
+
+  class JavaStatus
+    def call
+      {
+        properties: Java.java.lang.System.properties.to_hash
+      }
+    end
+  end
 end

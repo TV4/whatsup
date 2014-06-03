@@ -24,6 +24,10 @@ module Whatsup
         register(:sinatra, Whatsup::Collectors::SinatraStatus.new)
       end
 
+      if defined?(Java)
+        register(:java, Whatsup::Collectors::JavaStatus.new)
+      end
+
       register(:ruby, Whatsup::Collectors::RubyStatus.new)
 
       register(:date, ->() { DateTime.now })
