@@ -8,8 +8,12 @@ class Whatsup::StatusPage
       add_collector(key, collector)
     end
 
-    @username = options[:config].username || ENV['http_auth_user']
-    @password = options[:config].password || ENV['http_auth_password']
+    unless options[:config].username && options[:config].password
+      raise ArgumentError, "Whatsup needs to be explicitly configured with a username and password (See README)"
+    end
+
+    @username = options[:config].username
+    @password = options[:config].password
   end
 
   def call(env)
