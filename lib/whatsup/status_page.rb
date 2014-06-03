@@ -8,9 +8,6 @@ class Whatsup::StatusPage
       add_collector(key, collector)
     end
 
-    unless options[:config].username && options[:config].password
-      raise ArgumentError, "Whatsup needs to be explicitly configured with a username and password (See README)"
-    end
 
     @username = options[:config].username
     @password = options[:config].password
@@ -18,6 +15,10 @@ class Whatsup::StatusPage
 
   def call(env)
     if env["REQUEST_PATH"] == "/__status"
+      unless @username && @password
+        raise ArgumentError, "Whatsup needs to be explicitly configured with a username and password (See README)"
+      end
+
       auth_app = Rack::Auth::Basic.new(App.new(@app, self)) do |username, password|
         username == @username && password == @password
       end
