@@ -23,7 +23,7 @@ module Whatsup::Collectors
         cache: {
           type: Rails.cache.class.to_s,
           stats: (Rails.cache.respond_to?(:stats) ? Rails.cache.stats : nil)
-        }
+        },
         version: Rails::VERSION::STRING
       }
     end
