@@ -20,6 +20,10 @@ module Whatsup::Collectors
           log_level: Rails.configuration.log_level,
           rack_cache: Rails.configuration.action_dispatch
         },
+        cache: {
+          type: Rails.cache.class.to_s,
+          stats: (Rails.cache.respond_to?(:stats) ? Rails.cache.stats : nil)
+        }
         version: Rails::VERSION::STRING
       }
     end
@@ -39,28 +43,67 @@ module Whatsup::Collectors
     end
   end
 
-  class CacheStatus
-    def call
-      {
-        type: Rails.cache.class.to_s,
-        stats: (Rails.cache.respond_to?(:stats) ? Rails.cache.stats : nil)
-      }
-    end
-  end
-
   class SinatraStatus
     def call
       {
-        version: Sinatra::VERSION,
+        version: Sinatra::VERSION
       }
     end
   end
 
   class JavaStatus
     def call
-      {
-        properties: Java.java.lang.System.properties.to_hash
-      }
+      Java.java.lang.System.properties.to_hash
+    end
+  end
+
+  module Framework
+    class Rails
+      def call
+        {
+          name: "rails",
+          version: Rails::VERSION::STRING
+        }
+      end
+    end
+
+
+    class Sinatra
+      def call
+        {
+          name: "sinatra",
+          version: Sinatra::VERSION
+        }
+      end
+    end
+
+    class Rack
+      def call
+        {
+          name: "rack",
+          version: Rack.release
+        }
+      end
+    end
+  end
+
+  module Language
+    class JRuby
+      def call
+        {
+          name: "jruby",
+          version: JRUBY_VERSION
+        }
+      end
+    end
+
+    class Ruby
+      def call
+        {
+          name: "ruby",
+          version: "#{RUBY_VERSION}p#{RUBY_PATCHLEVEL}"
+        }
+      end
     end
   end
 end

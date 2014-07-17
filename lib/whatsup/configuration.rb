@@ -12,12 +12,7 @@ module Whatsup
       end
 
       if defined?(::Rails)
-        register(:cache, Whatsup::Collectors::CacheStatus.new)
         register(:rails, Whatsup::Collectors::RailsStatus.new)
-      end
-
-      if defined?(Sinatra)
-        register(:sinatra, Whatsup::Collectors::SinatraStatus.new)
       end
 
       if defined?(Java)
@@ -25,6 +20,20 @@ module Whatsup
       end
 
       register(:ruby, Whatsup::Collectors::RubyStatus.new)
+
+      if defined?(::Rails)
+        register(:framework, Whatsup::Collectors::Framework::Rails.new)
+      elsif defined(Sinatra)
+        register(:framework, Whatsup::Collectors::Framework::Sinatra.new)
+      else
+        register(:framework, Whatsup::Collectors::Framework::Rack.new)
+      end
+
+      if defined?(Java)
+        register(:language, Whatsup::Collectors::Language::JRuby.new)
+      else
+        register(:language, Whatsup::Collectors::Language::Ruby.new)
+      end
 
       register(:date, ->() { DateTime.now })
     end
@@ -34,4 +43,3 @@ module Whatsup
     end
   end
 end
-
