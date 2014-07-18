@@ -62,7 +62,7 @@ module Whatsup::Collectors
       def call
         {
           name: "rails",
-          version: Rails::VERSION::STRING
+          version: ::Rails::VERSION::STRING
         }
       end
     end
@@ -72,7 +72,7 @@ module Whatsup::Collectors
       def call
         {
           name: "sinatra",
-          version: Sinatra::VERSION
+          version: ::Sinatra::VERSION
         }
       end
     end
@@ -81,7 +81,7 @@ module Whatsup::Collectors
       def call
         {
           name: "rack",
-          version: Rack.release
+          version: ::Rack.release
         }
       end
     end
