@@ -23,7 +23,7 @@ module Whatsup
 
       if defined?(::Rails)
         register(:framework, Whatsup::Collectors::Framework::Rails.new)
-      elsif defined(Sinatra)
+      elsif defined?(Sinatra)
         register(:framework, Whatsup::Collectors::Framework::Sinatra.new)
       else
         register(:framework, Whatsup::Collectors::Framework::Rack.new)
