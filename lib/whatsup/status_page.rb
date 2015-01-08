@@ -12,7 +12,7 @@ class Whatsup::StatusPage
   end
 
   def call(env)
-    if env["PATH_INFO"] == "/__status"
+    if env['PATH_INFO'] == '/__status'
       whatsup.call(env)
     else
       @app.call(env)
@@ -36,11 +36,11 @@ class Whatsup::StatusPage
 
       req = Rack::Request.new(env)
 
-      if req.params["callback"]
-        body = "#{req.params["callback"]}(#{body})"
+      if req.params['callback']
+        body = "#{req.params['callback']}(#{body})"
       end
 
-      ['200', {"Content-Type" => "application/json"}, [body]]
+      ['200', { 'Content-Type' => 'application/json' }, [body]]
     end
   end
 
@@ -58,7 +58,7 @@ class Whatsup::StatusPage
 
   def authentication_required?
     if nil_credentials?
-      raise ArgumentError, "Whatsup needs to be explicitly configured with a username and password (See README)"
+      raise ArgumentError, 'Whatsup needs to be explicitly configured with a username and password (See README)'
     end
 
     !String(config.username).empty?

@@ -33,7 +33,7 @@ module Whatsup::Collectors
     def call
       {
         description: RUBY_DESCRIPTION,
-        yamler: YAML::ENGINE.yamler,
+        yamler: YAML.name,
         multi_json_engine: (defined?(MultiJson) ? MultiJson.engine.name : nil),
         gc: {
           count: GC.count,
