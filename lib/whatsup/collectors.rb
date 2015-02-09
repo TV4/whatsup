@@ -1,3 +1,5 @@
+require "yaml"
+
 module Whatsup::Collectors
   class ResqueStatus
     def call
