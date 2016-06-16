@@ -7,6 +7,10 @@ module Whatsup
     def initialize
       @collectors = {}
 
+      if defined?(Bundler)
+        register(:bundler, Whatsup::Collectors::BundlerStatus.new)
+      end
+
       if defined?(Resque)
         register(:job_queues, Whatsup::Collectors::ResqueStatus.new)
       end

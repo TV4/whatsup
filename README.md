@@ -56,6 +56,8 @@ Hash
 
 Included with the gem is collectors for:
 
+* `BundlerStatus`: Included i Bundler is defined. Gives you information
+  about all gems tracked by Bundler.
 * `RailsStatus`: Included if Rails is defined. Gives you information
   about Rails version, env, configuration and middleware
 * `RubyStatus`: Always included. Includes Ruby version and GC stats.

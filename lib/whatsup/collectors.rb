@@ -1,6 +1,17 @@
 require "yaml"
 
 module Whatsup::Collectors
+  class BundlerStatus
+    def call
+      Bundler.load.specs.sort_by(&:name).map do |gem|
+        {
+          name:    gem.name,
+          version: gem.version,
+        }
+      end
+    end
+  end
+
   class ResqueStatus
     def call
       Resque.queues.inject({}) do |hsh, queue_name|
